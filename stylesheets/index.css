@@ -7,24 +7,57 @@ a {
 	text-decoration: none;
 }
 
-#description {width: 63%;padding: .5em;}
-#time {width: 21%;padding: .5em;float: right;}
-#start {display: inline-block;width: 100%;text-align: center;margin-top: 1em;color: white;font-weight: bold;padding: .5em 0;background: green;}
+#description {
+	padding: .5em 2%;
+	width: 61%;
+	border: 0;
+}
+
+#time {
+	border: 0;
+	float: right;
+	margin-left: 2%;
+	padding: .5em 2%;
+	width: 27%;
+}
+
+#start {
+	background: green;
+	color: white;
+	display: inline-block;
+	font-weight: bold;
+	margin-top: 1em;
+	padding: .5em 0;
+	text-align: center;
+	width: 100%;
+}
 
 #newTask {
+	background-color: rgb(136, 204, 204);
 	border: 1px solid silver;
 	padding: 1em;
-	background-color: rgb(136, 204, 204);
 } 
 
-#project, #billable {display: none;}
+#project, #billable {
+	display: none;
+}
 
 @media screen and (min-width: 600px) {
-	#time {width:12%;float: none;}
-	#start {width: 15%;}
+	#time {
+		float : none;
+		width : 12%;
+	}
+	#start {
+		width: 15%;
+		margin: 0;
+	}
 }
 
 @media screen and (min-width: 800px) {
-	#project, #billable {display: inline-block;}
-	#description {width: 50%;}
+	#project, #billable {
+		display: inline-block;
+	}
+	#description {
+		width: 50%;
+	}
 }
