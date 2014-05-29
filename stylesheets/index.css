@@ -1,0 +1,30 @@
+body{
+	padding: 1em;
+	background-color: rgb(226, 230, 219);
+}
+
+a {
+	text-decoration: none;
+}
+
+#description {width: 63%;padding: .5em;}
+#time {width: 25%;padding: .5em;float: right;}
+#start {display: inline-block;width: 100%;text-align: center;margin-top: 1em;color: white;font-weight: bold;padding: .5em 0;background: green;}
+
+#newTask {
+	border: 1px solid silver;
+	padding: 1em;
+	background-color: rgb(136, 204, 204);
+} 
+
+#project, #billable {display: none;}
+
+@media screen and (min-width: 600px) {
+	#time {width:12%;float: none;}
+	#start {width: 15%;}
+}
+
+@media screen and (min-width: 800px) {
+	#project, #billable {display: inline-block;}
+	#description {width: 50%;}
+}

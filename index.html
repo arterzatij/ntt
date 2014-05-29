@@ -2,17 +2,21 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>NearShore TimeSheet</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="stylesheets/index.css" />
 </head>
+
 <body>
-	<section>
-		<input type="text" placeholder="Add description" id="">
-		<a href="#" class="btnProject" id="" >Project</a>
-		<a href="" class="btnBillable" id="">$</a>
-		<input type="text" class="btnTime" id="" value="00:00">
-		<a href="" class="btnStart" id="">Start</a>
+	<section id="newTask" >
+		<input type="text" placeholder="Add description" id="description">
+		<a href="" id="project"  >Project</a>
+		<a href="" id="billable" >$</a>
+		<input type="text" id="time"  value="00:00">
+		<a href="" id="start" >Start</a>
 	</section>
-	<section>
+<!--
+	<section id="projectPicker">
 		<input type="search" placeholder="Find Project" id="">
 		<div>
 			<ul>
@@ -24,11 +28,36 @@
 		<a href="" class="btnCreateProj" id="">Create Project</a>
 	</section>
 
-	<section>
+	<section id="timePicker">
 		<input type="text" placeholder="Start" id="">
 		<input type="text" placeholder="Stop" id="">
 		<<input type="date">
 		<a href="" class="btnApply" id="">Apply</a>
 	</section>
+
+	<section id="project">
+		<input type="text" placeholder="Project  Name" id="">
+		<a href="" class="btnSelectClient" id="">Apply</a>
+		Project Color: <input type="color" name="projColor"><br>
+  		<a href="" class="btnCreateProject" id="">Apply</a>
+	</section>
+
+	<section id="clientPicker">
+		<input type="search" placeholder="Find Client" id="">
+		<div>
+			<ul>
+				<li><a href="">Client1</a></li>
+				<li><a href="">Client2</a></li>
+				<li><a href="">Client3</a></li>
+			</ul>
+		</div>
+		<a href="" class="btnCreateClient" id="">Create Client</a>
+	</section>
+
+	<section id="client">
+		<input type="text" placeholder="Client  Name" id="">
+  		<a href="" class="btnCreateClient" id="">Create Client</a>
+	</section>
+	-->
 </body>
 </html>
