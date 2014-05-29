@@ -7,6 +7,11 @@ a {
 	text-decoration: none;
 }
 
+#projectPicker{
+	display: none;
+}
+
+
 #description {
 	padding: .5em 2%;
 	width: 61%;
@@ -43,21 +48,68 @@ a {
 }
 
 @media screen and (min-width: 600px) {
-	#time {
-		float : none;
-		width : 12%;
+	#description {
+		width: 53%;
 	}
-	#start {
+	#time {
+		float: none;
 		width: 15%;
 		margin: 0;
+	}
+	#start {
+		width: 20%;
+		margin: 0;
+		margin-left: 2%;
 	}
 }
 
 @media screen and (min-width: 800px) {
+	
+	#description {
+		width: 62%;
+	}
+	#time {
+		width: 8%;}
+	#start {
+		float: right;
+		margin: 0;
+	}
+
+}
+
+@media screen and (min-width: 1200px) {
+	body {padding: 3% 5%;}
+	
 	#project, #billable {
 		display: inline-block;
+		padding: 1em 2%;
+		font-size: 1.1em;
+	}
+	#project{
+		width: 20%;
+	} 
+	#billable {
+		width: 1%;
+	}
+	#newTask {
+		background-color: white;
+		border: 0;
+		padding: 0;
+		vertical-align: top;
+	}
+	#time {
+		width: 10%;
+		padding: 1em 2%;
+		font-size: 1.1em;
+	}
+	#start {
+		width: 7%;
+		padding: 1em 2%;
+		font-size: 1.1em;
 	}
 	#description {
-		width: 50%;
+		width: 40%;
+		padding: 1em 2%;
+		font-size: 1.1em;
 	}
 }

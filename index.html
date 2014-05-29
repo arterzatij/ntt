@@ -6,17 +6,18 @@
 	<title>NearShore TimeSheet</title>
 	<link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="stylesheets/index.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 
 <body>
 	<section id="newTask" >
-		<input type="text" placeholder="Add description" id="description">
-		<a href="" id="project"  >Project</a>
+		<input type="text" placeholder="Add description" id="description" required>
+		<a href="" id="project"  >+ Select Project</a>
 		<a href="" id="billable" >$</a>
-		<input type="text" id="time"  value="00:00">
+		<input type="text" id="time"  value="59:00 min">
 		<a href="" id="start" >Start</a>
 	</section>
-<!--
+
 	<section id="projectPicker">
 		<input type="search" placeholder="Find Project" id="">
 		<div>
@@ -29,6 +30,7 @@
 		<a href="" class="btnCreateProj" id="">Create Project</a>
 	</section>
 
+<!--
 	<section id="timePicker">
 		<input type="text" placeholder="Start" id="">
 		<input type="text" placeholder="Stop" id="">
