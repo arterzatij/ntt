@@ -8,7 +8,7 @@ a {
 }
 
 #description {width: 63%;padding: .5em;}
-#time {width: 25%;padding: .5em;float: right;}
+#time {width: 21%;padding: .5em;float: right;}
 #start {display: inline-block;width: 100%;text-align: center;margin-top: 1em;color: white;font-weight: bold;padding: .5em 0;background: green;}
 
 #newTask {
