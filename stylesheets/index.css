@@ -7,7 +7,30 @@ a {
 	text-decoration: none;
 }
 
-#projectPicker{
+.prettyScroll{overflow: auto!important;-webkit-overflow-scrolling:touch;overflow-scrolling:touch;}
+.prettyScroll::-webkit-scrollbar{width:8px}
+.prettyScroll::-webkit-scrollbar-thumb{background:#909fa7}
+.prettyScroll::-webkit-scrollbar-track-piece{background:#c2c7ca}
+#projects.prettyScroll {max-height:170px;}
+
+
+#createTask{
+	position: relative;
+}
+#newTask {
+	background-color: rgb(136, 204, 204);
+	border: 1px solid silver;
+	padding: 1em;
+} 
+
+#projectPicker {
+	border: 1px solid silver;
+	padding: 0;
+	position: absolute;
+	width: 24%;
+	background-color: rgb(207, 194, 194);
+	top: 0;
+	left: 514px;
 	display: none;
 }
 
@@ -36,12 +59,6 @@ a {
 	text-align: center;
 	width: 100%;
 }
-
-#newTask {
-	background-color: rgb(136, 204, 204);
-	border: 1px solid silver;
-	padding: 1em;
-} 
 
 #project, #billable {
 	display: none;
@@ -77,6 +94,7 @@ a {
 
 }
 
+/*Descktop view port size*/
 @media screen and (min-width: 1200px) {
 	body {padding: 3% 5%;}
 	
@@ -112,4 +130,50 @@ a {
 		padding: 1em 2%;
 		font-size: 1.1em;
 	}
+}
+
+
+#findProject{
+    width: 85%;
+    padding: 1em 10% 1em 5%;  font-size: 1.1em;
+    border: 0;
+}
+
+#findControl {
+	position: relative;
+}
+
+a#close {
+    position: absolute;
+    right: 12px;
+    top: 19px;
+}
+
+ul#projects {
+    font-size: 14px;
+    padding: 1.2em;
+    margin: 0;
+    list-style: none;
+    border-bottom: 2px solid gray;
+    background-color: rgb(230, 227, 231);
+}
+
+#projects > li {
+	margin: .5em 0;
+}
+
+#projects > li > a {
+	color: black;
+}
+
+#createproj {
+	background: white;
+	color: black;
+	display: block;
+	font-weight: bold;
+	margin: 1.3em auto;
+	padding: .5em 0;
+	text-align: center;
+	width: 50%;
+	font-size: .7em;
 }
