@@ -13,6 +13,9 @@ a {
 .prettyScroll::-webkit-scrollbar-track-piece{background:#c2c7ca}
 #projects.prettyScroll {max-height:170px;}
 
+.show {
+	display: block;
+}
 
 #createTask{
 	position: relative;
@@ -32,6 +35,7 @@ a {
 	top: 0;
 	left: 514px;
 	display: none;
+	overflow: hidden;
 }
 
 
@@ -78,6 +82,7 @@ a {
 		margin: 0;
 		margin-left: 2%;
 	}
+
 }
 
 @media screen and (min-width: 800px) {
@@ -91,7 +96,9 @@ a {
 		float: right;
 		margin: 0;
 	}
-
+	#projectPicker {
+		display: none;
+	}
 }
 
 /*Descktop view port size*/
@@ -133,14 +140,32 @@ a {
 }
 
 
-#findProject{
-    width: 85%;
-    padding: 1em 10% 1em 5%;  font-size: 1.1em;
+#findProject, #newProjectName {
     border: 0;
+    font-size: 1.1em;
+    padding: 1em 10% 1em 5%; 
+    width: 85%;
 }
 
 #findControl {
 	position: relative;
+}
+
+div#newProject {
+    height: 319px;
+    position: absolute;
+    top: -319px;
+    -o-transition: 0.3s;  
+    -ms-transition: 0.3s;  
+    -moz-transition: 0.3s;  
+    -webkit-transition: 0.3s;  
+    transition: 0.3s;
+    background: gray;
+    z-index: 2;
+}
+
+div#newProject.show{
+	top: 0;
 }
 
 a#close {
@@ -176,4 +201,18 @@ ul#projects {
 	text-align: center;
 	width: 50%;
 	font-size: .7em;
+}
+
+
+#saveProject {
+	background: green;
+	color: white;
+	display: block;
+	font-weight: bold;
+	margin: 1.3em auto;
+	padding: .5em 0;
+	text-align: center;
+	width: 50%;
+	font-size: .7em;
+
 }
