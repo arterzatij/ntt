@@ -1,0 +1,31 @@
+{
+  "name": "tt-nst-project",
+  "version": "0.0.0",
+  "description": "Projecto node con dependencias",
+  "main": "server.js",
+  "scripts": {
+    "bundle": "browserify app/js/main.js -o app/js/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:arielparra/nst-timesheet-web.git"
+  },
+  "keywords": [
+    "bower",
+    "node",
+    "npm",
+    "time",
+    "stylus"
+  ],
+  "author": "Ernesto Arteaga <arterzatij@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arielparra/nst-timesheet-web/issues"
+  },
+  "homepage": "https://github.com/arielparra/nst-timesheet-web",
+  "dependencies": {
+    "bower": "^1.3.4",
+    "browserify": "^4.1.8",
+    "stylus": "^0.46.2"
+  }
+}
