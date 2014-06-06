@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>NearShore TimeSheet</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/icons.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<script src="js/vendor/jquery.min.js"></script>
+	<script src="js/vendor/underscore-min.js"></script>
+	<script src="js/vendor/backbone-min.js"></script>
+	<script src="js/index.js"></script>
+</head>
+
+<body>
+
+	<section id="createTask">
+
+		<div id="newTask">
+			<input id="description" type="text" placeholder="Add a description" required>
+			<a id="project" href="">+ Select Project</a>
+			<a id="billable" href="">$</a>
+			<input id="time" type="text" value="00:00:00">
+			<a href="" id="start" class="icon-start"></a>
+		</div>
+
+		<div id="projectPicker">
+
+			<div id="newProject">
+				<input id="newProjectName" type="text" placeholder="Project Name" >
+				<a href="" class="btnSelectClient" id="">Select Client</a>
+				Project Color: <input type="color" name="projColor"><br>
+		  		<a id="saveProject" href="">Create Project</a>
+			</div>
+
+			<div id="findControl">
+				<input id="findProject" type="search" placeholder="Find Project...">
+				<a id="close" href="">x</a>
+			</div>
+
+			<ul id="projects" class="prettyScroll">
+				<li><a class="project" href="#">ModernMeal</a></li>
+				<li><a class="project" href="#">Check Into Cash In Cleveland Tenessee</a></li>
+				<li><a class="project" href="#">Advance America</a></li>
+				<li><a class="project" href="#">Nearshore</a></li>
+				<li><a class="project" href="#">Project number 1 that creates a new screen</a></li>
+				<li><a class="project" href="#">Advance America 3</a></li>
+				<li><a class="project" href="#">Advance America 44444</a></li>
+			</ul>
+			
+			<a id="createproj" href=""> + CREATE PROJECT</a>
+
+		</div>
+		
+	</section>
+
+	
+<!--
+	<section id="timePicker">
+		<input type="text" placeholder="Start" id="">
+		<input type="text" placeholder="Stop" id="">
+		<<input type="date">
+		<a href="" class="btnApply" id="">Apply</a>
+	</section>
+
+	
+
+	<section id="clientPicker">
+		<input type="search" placeholder="Find Client" id="">
+		<div>
+			<ul>
+				<li><a href="">Client1</a></li>
+				<li><a href="">Client2</a></li>
+				<li><a href="">Client3</a></li>
+			</ul>
+		</div>
+		<a href="" class="btnCreateClient" id="">Create Client</a>
+	</section>
+
+	<section id="client">
+		<input type="text" placeholder="Client  Name" id="">
+  		<a href="" class="btnCreateClient" id="">Create Client</a>
+	</section>
+	-->
+</body>
+</html>

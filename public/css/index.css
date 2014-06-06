@@ -1,10 +1,14 @@
-body{
-	padding: 1em;
-	background-color: rgb(226, 230, 219);
+a {
+  text-decoration: none;
 }
 
-a {
-	text-decoration: none;
+body{
+  padding: 1em;
+  background-color: rgb(226, 230, 219);
+}
+
+input.error {
+	border: 1px red solid;
 }
 
 .prettyScroll{overflow: auto!important;-webkit-overflow-scrolling:touch;overflow-scrolling:touch;}
@@ -57,11 +61,14 @@ a {
 	background: green;
 	color: white;
 	display: inline-block;
-	font-weight: bold;
 	margin-top: 1em;
-	padding: .5em 0;
+	padding: 0.4em 0;
 	text-align: center;
 	width: 100%;
+}
+
+a#start.icon-stop {
+	background: red;
 }
 
 #project, #billable {
@@ -81,7 +88,10 @@ a {
 		width: 20%;
 		margin: 0;
 		margin-left: 2%;
-	}
+	
+		font-size: 1.3em;
+		float: right;
+}
 
 }
 
@@ -129,8 +139,8 @@ a {
 	}
 	#start {
 		width: 7%;
-		padding: 1em 2%;
-		font-size: 1.1em;
+		padding: .4em 2%;
+		font-size: 2em;
 	}
 	#description {
 		width: 40%;

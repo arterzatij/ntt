@@ -1,4 +1,8 @@
-ntt
+tt-ntt
 ===
 
-NearShoreTechnologies Time Tracking
+Time Tracking - NearShore Technology
+
+
+## how to start
+
