@@ -5,7 +5,7 @@ Time Tracking - Nearshore Technology
 
 ### Setup your dev environment
 
-* After clone the code, install [NodeJS](http://nodejs.org/).
+* After clone the code, install [NodeJS].
 * We are workign with fourth modules for node [stylus](http://learnboost.github.io/stylus/docs/executable.html), [bower](http://bower.io/), [browserify](http://browserify.org/) and [gulp](http://gulpjs.com/).
 * We install them using [npm](https://www.npmjs.org/).
 
@@ -21,3 +21,5 @@ Time Tracking - Nearshore Technology
 ```
   bower install
 ```
+
+[NodeJS]:http://nodejs.org/
