@@ -10,6 +10,9 @@ Time Tracking - Nearshore Technology
 3. We install them using [npm](https://www.npmjs.org/).
 
 > npm install -g stylus
+
 > npm install -g bower
+
 > npm install -g browserify
+
 > npm install -g gulp
