@@ -19,4 +19,4 @@ Term 3
 
 :   Definition D
 
-	> part of definition D
+	Part of definition D
