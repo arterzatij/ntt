@@ -1,22 +1,15 @@
-tt-ntt
-===
+tt-nst
+====
 
-Time Tracking - NearShore Technology
+Time Tracking - Nearshore Technology
 
+### Set up your dev environment
+---
 
-## how to start
-
-**Markdown Extra** has a special syntax for definition lists too:
-
-Term 1
-Term 2
-:   Definition A
-:   Definition B
-
-Term 3
-
-:   Definition C
-
-:   Definition D
-
-	Part of definition D
+    1. After clone the code, install [NodeJS](http://nodejs.org/)
+    2. We are workign with fourth modules for node [stylus](http://learnboost.github.io/stylus/docs/executable.html), [bower](http://bower.io/), [browserify](http://browserify.org/) and [gulp](http://gulpjs.com/)
+    3. We install theml using [npm](https://www.npmjs.org/)
+    	npm install -g stylus
+    	npm install -g bower
+    	npm install -g browserify
+    	npm install -g gulp
