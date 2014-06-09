@@ -52,6 +52,7 @@ var Timer = function (input) {
   }
 };
 
+
 CreateTaskView = Backbone.View.extend({
     events : {
         'click #start.icon-start' : 'startTask',

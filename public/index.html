@@ -24,44 +24,51 @@
 			<a id="billable" href="">$</a>
 			<input id="time" type="text" value="00:00:00">
 			<a href="" id="start" class="icon-start"></a>
+
+
+	        <div id="projectPicker">
+	 
+				<div id="newProject">
+					<input id="newProjectName" type="text" placeholder="Project Name" >
+					<a href="" class="btnSelectClient" id="">Select Client</a>
+					Project Color: <input type="color" name="projColor"><br>
+			  		<a id="saveProject" href="">Create Project</a>
+				</div>
+
+				<div id="findControl">
+					<input id="findProject" type="search" placeholder="Find Project...">
+					<a id="close" href="">x</a>
+				</div>
+
+				<ul id="projects" class="prettyScroll">
+					<li><a class="project" href="#">ModernMeal</a></li>
+					<li><a class="project" href="#">Check Into Cash In Cleveland Tenessee</a></li>
+					<li><a class="project" href="#">Advance America</a></li>
+					<li><a class="project" href="#">Nearshore</a></li>
+					<li><a class="project" href="#">Project number 1 that creates a new screen</a></li>
+					<li><a class="project" href="#">Advance America 3</a></li>
+					<li><a class="project" href="#">Advance America 44444</a></li>
+				</ul>
+				
+				<a id="createproj" href=""> + CREATE PROJECT</a>
+			</div>
 		</div>
 
-		<div id="projectPicker">
-
-			<div id="newProject">
-				<input id="newProjectName" type="text" placeholder="Project Name" >
-				<a href="" class="btnSelectClient" id="">Select Client</a>
-				Project Color: <input type="color" name="projColor"><br>
-		  		<a id="saveProject" href="">Create Project</a>
-			</div>
-
-			<div id="findControl">
-				<input id="findProject" type="search" placeholder="Find Project...">
-				<a id="close" href="">x</a>
-			</div>
-
-			<ul id="projects" class="prettyScroll">
-				<li><a class="project" href="#">ModernMeal</a></li>
-				<li><a class="project" href="#">Check Into Cash In Cleveland Tenessee</a></li>
-				<li><a class="project" href="#">Advance America</a></li>
-				<li><a class="project" href="#">Nearshore</a></li>
-				<li><a class="project" href="#">Project number 1 that creates a new screen</a></li>
-				<li><a class="project" href="#">Advance America 3</a></li>
-				<li><a class="project" href="#">Advance America 44444</a></li>
-			</ul>
-			
-			<a id="createproj" href=""> + CREATE PROJECT</a>
-
-		</div>
-		
 	</section>
 
-	
+
 <!--
+
+  *put margin top for 600 & 800 width
+  *fix font size
+  *fix 
+
+
+
 	<section id="timePicker">
 		<input type="text" placeholder="Start" id="">
 		<input type="text" placeholder="Stop" id="">
-		<<input type="date">
+		<input type="date">
 		<a href="" class="btnApply" id="">Apply</a>
 	</section>
 
@@ -83,6 +90,6 @@
 		<input type="text" placeholder="Client  Name" id="">
   		<a href="" class="btnCreateClient" id="">Create Client</a>
 	</section>
-	-->
+	
 </body>
 </html>
