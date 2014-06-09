@@ -9,7 +9,7 @@ Time Tracking - Nearshore Technology
 * We are workign with fourth modules for node [stylus], [bower], [browserify] and [gulp].
 * We install them using [npm].
 
-```
+```sh
   npm install -g stylus
   npm install -g bower
   npm install -g browserify
@@ -18,7 +18,7 @@ Time Tracking - Nearshore Technology
 
 * Now we need to install frontend dependencies
 
-```
+```sh
   bower install
 ```
 
