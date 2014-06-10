@@ -11,15 +11,13 @@ Time Tracking - Nearshore Technology
 
 ```sh
   npm install -g stylus
-  npm install -g bower
-  npm install -g browserify
   npm install -g gulp
 ```
 
 * Now we need to install frontend dependencies
 
 ```sh
-  bower install
+  npm install
 ```
 
 [NodeJS]:http://nodejs.org/
