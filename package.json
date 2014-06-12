@@ -1,27 +1,28 @@
 {
   "name": "tt-nst-project",
-  "version": "0.0.0",
-  "description": "Projecto node con dependencias",
-  "main": "server.js",
-  "scripts": {
-    "require": "npm install -g bower browserify stylus",
-    "bundle": "browserify app/js/main.js -o app/js/app.js"
-  },
+  "version": "0.0.1",
+  "description": "Project Time Tracker - NearShore Technology",
+  "homepage": "https://github.com/arielparra/nst-timesheet-web",
+  "author": "Ernesto Arteaga <arterzatij@gmail.com>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@github.com:arielparra/nst-timesheet-web.git"
   },
-  "keywords": [
-    "bower",
-    "node",
-    "npm",
-    "time",
-    "stylus"
-  ],
-  "author": "Ernesto Arteaga <arterzatij@gmail.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/arielparra/nst-timesheet-web/issues"
   },
-  "homepage": "https://github.com/arielparra/nst-timesheet-web",
+  "dependencies": {
+    "jquery": "^2.1.1",
+    "backbone": "^1.1.2"
+  },
+  "devDependencies": {
+    "browserify": "^4.1.8",
+    "stylus": "^0.46.2",
+    "gulp": "^3.7.0"
+  },
+  "scripts": {
+    "bundle": "browserify app/backbone/app.js > app/js/index.js"
+  },
+  "main": "server.js"
 }

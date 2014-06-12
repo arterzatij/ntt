@@ -1,86 +1,118 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>NearShore TimeSheet</title>
-	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
-	<link rel="stylesheet" type="text/css" href="css/index.css" />
-	<script src="../bower_components/jquery/dist/jquery.js"></script>
-	<script src="../bower_components/underscore.js"></script>
-	<script src="../bower_components/backbone.js"></script>
-	<script src="js/index.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NearShore TimeSheet</title>
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <script src="js/index.js"></script>
 </head>
 
 <body>
 
-	<section id="createTask">
-
-		<div id="newTask" >
-			<input id="description" type="text" placeholder="Add description" required>
-			<a id="project" href="">+ Select Project</a>
-			<a id="billable" href="" >$</a>
-			<input id="time" type="text" value="00:00:00">
-			<a href="" id="start" >Start</a>
-		</div>
-
-		<div id="projectPicker">
-
-			<div id="newProject">
-				<input id="newProjectName" type="text" placeholder="Project Name" >
-				<a href="" class="btnSelectClient" id="">Select Client</a>
-				Project Color: <input type="color" name="projColor"><br>
-		  		<a id="saveProject" href="">Create Project</a>
+  <section id="createTask" class="row">
+    <div class="small-12">
+      <div class="row">
+      	<div class="small-9">
+      		<div class="row">
+      			<div class="small-12">
+			        <input id="timer" class="time" name="time" 
+			               type="text" value="00:00:00">
+      			</div>
+      			<div class="small-12">
+			        <input class="description" name="description" 
+			               type="text" placeholder="Add a description">
+      			</div>
+      		</div>
+      	</div>
+      	<div class="small-3">
+        	<a id="start" class="start icon-start" href="#"></a>
+      	</div>
+      </div>
+			<div class="row">
+				<div class="small-12">
+		      <input id="project" 
+		             type="text" placeholder="+ Select Project">
+		      <label for="billable">$</label>
+		      <input id="billable" type="checkbox">
+				</div>
 			</div>
 
-			<div id="findControl">
-				<input id="findProject" type="search" placeholder="Find Project...">
-				<a id="close" href="">x</a>
-			</div>
+      <div id="projectPicker">
 
-			<ul id="projects" class="prettyScroll" >
-				<li><a class="project" href="#">ModernMeal</a></li>
-				<li><a class="project" href="#">Check Into Cash In Cleveland Tenessee</a></li>
-				<li><a class="project" href="#">Advance America</a></li>
-				<li><a class="project" href="#">Nearshore</a></li>
-				<li><a class="project" href="#">Project number 1 that creates a new screen</a></li>
-				<li><a class="project" href="#">Advance America 3</a></li>
-				<li><a class="project" href="#">Advance America 44444</a></li>
-			</ul>
-			
-			<a id="createproj" href=""> + CREATE PROJECT</a>
+        <div id="newProject">
+          <input id="newProjectName" 
+                 type="text" placeholder="Project Name" >
+          <a href="" class="btnSelectClient" id="">Select Client</a>
+          <label for="search">Project Color:</label>
+          <input type="color" name="projColor">
+          <br/>
+          <a id="saveProject" href="">Create Project</a>
+        </div>
 
-		</div>
-		
-	</section>
+        <div id="findControl">
+          <input id="findProject" type="search" placeholder="Find Project...">
+          <a id="close" href="">x</a>
+        </div>
 
-	
-<!--
-	<section id="timePicker">
-		<input type="text" placeholder="Start" id="">
-		<input type="text" placeholder="Stop" id="">
-		<<input type="date">
-		<a href="" class="btnApply" id="">Apply</a>
-	</section>
+        <ul id="projects" class="prettyScroll">
+          <li><a class="project" href="#">ModernMeal</a></li>
+          <li><a class="project" href="#">Check Into Cash In Cleveland Tenessee</a></li>
+          <li><a class="project" href="#">Advance America</a></li>
+          <li><a class="project" href="#">Nearshore</a></li>
+          <li><a class="project" href="#">Project number 1 that creates a new screen</a></li>
+          <li><a class="project" href="#">Advance America 3</a></li>
+          <li><a class="project" href="#">Advance America 44444</a></li>
+        </ul>
+        
+        <a id="createproj" href=""> + CREATE PROJECT</a>
 
-	
+      </div>
+    </div>
+  </section>
 
-	<section id="clientPicker">
-		<input type="search" placeholder="Find Client" id="">
-		<div>
-			<ul>
-				<li><a href="">Client1</a></li>
-				<li><a href="">Client2</a></li>
-				<li><a href="">Client3</a></li>
-			</ul>
-		</div>
-		<a href="" class="btnCreateClient" id="">Create Client</a>
-	</section>
+  <section id="taskList" class="row">
+    <article>
+      
+    </article>
+  </section>
 
-	<section id="client">
-		<input type="text" placeholder="Client  Name" id="">
-  		<a href="" class="btnCreateClient" id="">Create Client</a>
-	</section>
-	-->
 </body>
 </html>
+
+
+<!--
+  <section id="timePicker">
+    <input type="text" placeholder="Start" id="">
+    <input type="text" placeholder="Stop" id="">
+    <<input type="date">
+    <a href="" class="btnApply" id="">Apply</a>
+  </section>
+
+  
+
+  <section id="clientPicker">
+    <input type="search" placeholder="Find Client" id="">
+    <div>
+      <ul>
+        <li><a href="">Client1</a></li>
+        <li><a href="">Client2</a></li>
+        <li><a href="">Client3</a></li>
+      </ul>
+    </div>
+    <a href="" class="btnCreateClient" id="">Create Client</a>
+  </section>
+
+  <section id="client">
+    <input type="text" placeholder="Client  Name" id="">
+      <a href="" class="btnCreateClient" id="">Create Client</a>
+  </section>
+  -->
+
+<!--ul class="themeBox">
+  <li draggable="false" aria-haspopup="true" data-index="0" style="background: rgb(0, 15, 90);" class="selected"></li>
+  <li draggable="false" aria-haspopup="true" data-index="1" style="background: rgb(1, 76, 141);" class=""></li>
+  <li draggable="false" aria-haspopup="true" data-index="2" style="background: rgb(1, 103, 164);" class="basecolor"></li>
+  <li draggable="false" aria-haspopup="true" data-index="3" style="background: rgb(7, 198, 227);" class=""></li>
+  <li draggable="false" aria-haspopup="true" data-index="4" style="background: rgb(241, 241, 241);" class=""></li>
+</ul-->

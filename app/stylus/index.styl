@@ -1,3 +1,86 @@
 @import "normalize.styl"
-@import "fonts.styl"
+@import "icons.styl"
+@import "grid-12.styl"
 
+//base color
+nst_orange = #F27621
+
+//analogous colors
+orange_20 = #DB8113
+orange_40 = #F9AC16
+red_40 = #DB4713
+red_20 = #F93016
+
+//complementary colors
+c_brown = #A54A0B
+c_peach = #FF8B3C
+c_blue = #009AA5
+c_cyan = #21E4F2
+
+//triad colors
+t_brown = #A54706
+t_green = #47F43A
+t_cyan = #1E07BF
+t_blue = #210EA5
+
+//default font color
+df_black = #797979
+
+html
+  font-family 'Open Sans'
+
+body
+  background nst_orange
+  color df_black
+
+input
+  border 0.1rem solid white
+
+input[type=password]
+input[type=search]
+input[type=text]
+  width 100%
+
+  &.error
+    border-bottom-left-radius 0.3rem
+    border-left 0.3rem solid red_20
+    border-top-left-radius 0.3rem
+    transition 0.3s
+    -o-transition 0.3s
+    -moz-transition 0.3s
+    -ms-transition 0.3s
+    -webkit-transition 0.3s
+
+  &:focus
+    outline none
+
+#createTask
+  background white
+  height 27.9rem
+
+  .description
+    font-size 2rem
+    line-height 3.5rem
+    padding-left 0.2rem
+
+  .start
+    display block
+    font-size 5rem
+    line-height 10rem
+    text-align center
+    text-decoration none
+    transition 0.3s
+    -o-transition 0.3s
+    -moz-transition 0.3s
+    -ms-transition 0.3s
+    -webkit-transition 0.3s
+
+    &.icon-start
+      color c_blue
+
+    &.icon-stop
+      color red_40
+
+  .time
+    color orange_40
+    font-size 5rem
