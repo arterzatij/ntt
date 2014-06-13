@@ -29,7 +29,7 @@ module.exports = Backbone.View.extend({
       this.$('#start').addClass('icon-stop').removeClass('icon-start');
     } else {
       $input.addClass('error');
-      $input.attr('placeholder', 'Please add a description!');
+      $input.attr('placeholder', 'What are you working on!');
     }
   },
   stopTask : function (e) {
