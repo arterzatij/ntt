@@ -74,11 +74,14 @@
 <!-- savedProjectsTemplate -->
 <script type="text/template" id="saved_project_element_template">
 	<li style="background-color:{{color}}" id="{{projectName}}{{description}}"><a class="project" ><p style="color:{{textColor}}">
-	<b>Project:</b> {{projectName}} <b>Description:</b> {{description}} <b>Time:</b> {{time}} <b>Color:</b> {{color}}
-	<b>Start-date/time: </b> {{dateStart.sMonth}}/{{dateStart.sDay}}/{{dateStart.sYear}} 
-	<b> {{dateStart.sHours}}:{{dateStart.sMinutes}} - {{dateStart.sAmPm}}</b>
+	<b>Project:</b> {{projectName}} - <b>Description:</b> {{description}}  - <b>Elapsed Time:</b> {{time}} - <b>Start date: </b> {{dateStart.sMonth}}/{{dateStart.sDay}}/{{dateStart.sYear}} -
+	<b> {{dateStart.sHours}}:{{dateStart.sMinutes}} {{dateStart.sAmPm}}</b>
+    <b>-::- End date: </b> {{dateEnd.eMonth}}/{{dateEnd.eDay}}/{{dateEnd.eYear}} -
+    <b> {{dateEnd.eHours}}:{{dateEnd.eMinutes}} {{dateEnd.eAmPm}}</b>
 
 	</p>
+ 
+
 
 
 	</a></li>
@@ -157,23 +160,47 @@
     		this.set({systemTimeBegin:time});
     	},
 
-    	setStartTime: function(){
-			var date = new Date();
-    		var hours = date.getHours();
-    		var t     = ''
-    		
-    		if(date.getHours() > 12){
-    			hours -= 12;
-    			t = 'pm';
-    	    }
-    	    else
-    	   	    t = 'am';
+        setStartTime: function(){
+             
+            var date  = new Date();
+            var hours = date.getHours();
+            var ampm  = '';
+            var min   = '';
 
-    		this.set({dateStart: { sYear: date.getFullYear(), sMonth: date.getUTCMonth()+1,
-    							   sDay: date.getDate(), sHours: hours, 
-    							   sMinutes:date.getMinutes()}, sAmPm:t });
+            
+            if(date.getHours() > 12){
+                hours -= 12;
+                ampm = 'pm';
+            }
+            else
+                ampm = 'am';
 
-    	}
+            min = (date.getMinutes().toString().length < 2) ? "0"+date.getMinutes() : date.getMinutes()
+
+            this.set({dateStart: { sYear: date.getFullYear(), sMonth: date.getUTCMonth()+1,
+                                   sDay: date.getDate(), sHours: hours, 
+                                   sMinutes: min, sAmPm: ampm }});
+        },
+        setEndTime: function(){
+            var date  = new Date();
+            var hours = date.getHours();
+            var ampm  = '';
+            var min   = '';
+
+            
+            if(date.getHours() > 12){
+                hours -= 12;
+                ampm = 'pm';
+            }
+            else
+                ampm = 'am';
+
+            min = (date.getMinutes().toString().length < 2) ? "0"+date.getMinutes() : date.getMinutes()
+
+            this.set({dateEnd: { eYear: date.getFullYear(), eMonth: date.getUTCMonth()+1,
+                                   eDay: date.getDate(), eHours: hours, 
+                                   eMinutes:min, eAmPm:ampm } });
+        }
 
     });
 
@@ -214,7 +241,8 @@
 	    	el: '#createTask',
 
 			events:{
-	    		"click a#start.icon-stop" : "addSavedProject"
+	    		"click a#start.icon-stop" : "addSavedProject",
+                "click a#start.icon-start": "beginRecording"
 	    	},
 
 	    	initialize: function(){
@@ -225,9 +253,13 @@
 	    	render: function(){
 
 	    	},
+            beginRecording: function(){
+                this.savedProjectsView.beginRecording();
+            },
 	    	addSavedProject: function(){
-	    		this.savedProjectsView.addSavedProject();
+	    		this.savedProjectsView.addSavedProject(this.savedProjectsView.recModel);
 	    	}
+
 	    });
 
 	//List tobe displayed
@@ -243,47 +275,38 @@
 
     	initialize:      function() {
     		this.templateElement   = swig.compile($("#saved_project_element_template").html());
+            this.recModel= new ProjectElement();
 
-    		this.savedProjectsList = new SavedProjectsList();
-
+    		this.savedProjectsList     = new SavedProjectsList();
+        
     		var self = this;
     		this.savedProjectsList.on('add', function(element){
     			self.$el.append(self.templateElement(element.toJSON()));
     		});
     	},
 
-    	addSavedProject: function(event) {
-    		var model = new ProjectElement();
-    		
-    		//search the collections then add model if results are okay
-    		
-    		this.found = displayProjects.savedProjectsView.savedProjectsList.where({description:$('#description').val(), projectName:$('#project').text()});
+        beginRecording:  function(events){
 
-    		
-	    		if(!($('#project').text() == "+ Select Project"))
-	    			model.setProjectName($('#project').text());
-	    		else{
-	    			model.setProjectName(projectNumber);
-	    			projectNumber++;
-	    		}
+            this.recModel = new ProjectElement();
+            //search the collections then add model if results are okay
+            this.found = displayProjects.savedProjectsView.savedProjectsList.where({description:$('#description').val(), projectName:$('#project').text()});
 
-	    		
-	    		model.setDescription($('#description').val());
-	    		model.setTime($("input#time").val());
-	    		model.setColor($('input[type=color]').val());
+            if(!($('#project').text() == "+ Select Project"))
+                    this.recModel.setProjectName($('#project').text());
+                else{
+                    this.recModel.setProjectName(projectNumber);
+                    projectNumber++;
+                }
 
-	    		this.savedProjectsList.add(model);
-    	},
+                this.recModel.setDescription($('#description').val());
+                
+                this.recModel.setColor($('input[type=color]').val());
+        },
 
-    	selectProject: function(){
-
-    	},
-
-    	toggleProject: function(model){
-    		if(model.selected)
-    			displayProjects.savedProjectsView.savedProjectsList.setSelected(false);
-    		else
-    			displayProjects.savedProjectsView.savedProjectsList.setSelected(true);
+    	addSavedProject: function(m) {
+                m.setEndTime()
+                this.recModel.setTime($("input#time").val());
+	    		this.savedProjectsList.add(m);
     	}
 
     });
