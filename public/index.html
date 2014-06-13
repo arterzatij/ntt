@@ -4,14 +4,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>NearShore TimeSheet</title>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet'>
-	<link rel='stylesheet' href='css/normalize.css' />
-	<link rel='stylesheet' href='css/icons.css' />
-	<link rel='stylesheet' href='css/index.css' />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/icons.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
 	<script src="js/vendor/jquery.min.js"></script>
 	<script src="js/vendor/underscore-min.js"></script>
+	<script src="js/vendor/swig.js"></script>
 	<script src="js/vendor/backbone-min.js"></script>
 	<script src="js/index.js"></script>
+
 </head>
 
 <body>
@@ -31,7 +33,7 @@
 				<div id="newProject">
 					<input id="newProjectName" type="text" placeholder="Project Name" >
 					<a href="" class="btnSelectClient" id="">Select Client</a>
-					Project Color: <input type="color" name="projColor"><br>
+					Project Color: <input type="color" name="projColor" ><br>
 			  		<a id="saveProject" href="">Create Project</a>
 				</div>
 
@@ -40,30 +42,257 @@
 					<a id="close" href="">x</a>
 				</div>
 
-				<ul id="projects" class="prettyScroll">
-					<li><a class="project" href="#">ModernMeal</a></li>
-					<li><a class="project" href="#">Check Into Cash In Cleveland Tenessee</a></li>
-					<li><a class="project" href="#">Advance America</a></li>
-					<li><a class="project" href="#">Nearshore</a></li>
-					<li><a class="project" href="#">Project number 1 that creates a new screen</a></li>
-					<li><a class="project" href="#">Advance America 3</a></li>
-					<li><a class="project" href="#">Advance America 44444</a></li>
-				</ul>
-				
+				<!-- projectlist goes here -->
 				<a id="createproj" href=""> + CREATE PROJECT</a>
+
+
 			</div>
 		</div>
 
 	</section>
 
 
+<!--backbone -->
+<script>
+	var projects = [
+	  {name: "modernmeal"},
+	  {name:  "CheckIntoCash"},
+	  {name:  "Advance"},
+	  {name:  "NearShore"},
+	  {name:  "Project01"},
+	  {name:  "AdvanceAmerica03"},
+	  {name:  "AdvanceAmerica444"},
+	  {name:  "Protech" }
+	];
+	var projectNumber = 0;
+</script>
+
+<!-- projectElementTemplate -->
+<script type="text/template" id="project_element_template">
+	<li><a class="project" href="#">{{name}}</a></li>
+</script>
+<!-- savedProjectsTemplate -->
+<script type="text/template" id="saved_project_element_template">
+	<li style="background-color:{{color}}" id="{{projectName}}{{description}}"><a class="project" ><p style="color:{{textColor}}">
+	<b>Project:</b> {{projectName}} <b>Description:</b> {{description}} <b>Time:</b> {{time}} <b>Color:</b> {{color}}
+	<b>Start-date/time: </b> {{dateStart.sMonth}}/{{dateStart.sDay}}/{{dateStart.sYear}} 
+	<b> {{dateStart.sHours}}:{{dateStart.sMinutes}} - {{dateStart.sAmPm}}</b>
+
+	</p>
+
+
+	</a></li>
+</script>
+
+<!--search bar -->
+<div id="search_container"></div>
+
+
+
+<script type="text/javascript">
+
+
+	//MODELS
+	ProjectScroll   = Backbone.Model.extend({});
+    ProjectElement  = Backbone.Model.extend({
+    	defaults : {
+    		projectName: '',
+    		description: '',
+    		time       : '',
+    		billable   : '',
+    		color      : 'white',
+    		textColor  : 'white',
+    		selected   : 'false',
+    		dateStart: {
+    			sMonth:'',
+    			sDay:'',
+    			sYear:'',
+    			sHours:'',
+    			sMinutes:'',
+    			sAmPm: ''
+    		},
+       		dateEnd: {
+    			eMonth:'',
+    			eDay:'',
+    			eYear:'',
+    			eHours:'',
+    			eMinutes:'',
+    			eAmPm:''
+    		}
+    	},
+
+    	initialize: function (options) {
+
+    		//handle the time
+    		this.setStartTime();
+    	},
+    	
+    	setProjectName: function (name) {
+    		this.set({ projectName: name})
+    	},
+
+    	setDescription: function(desc){
+    		this.set({ description: desc });
+    	},
+
+    	setTime: function(timer){
+    		this.set({ time: timer });
+    	},
+    	setBillable: function(bill){
+    		this.set({ billable: bill });
+    	},
+    	setColor: function(color){
+    		this.set({color: color});
+    	},
+    	setTextColor: function(color){
+    		this.set({color: color});
+    	},
+    	setSelected: function(bool){
+    		this.set({selected:bool});
+    	},
+    	setSystemTimeEnd: function(time){
+    		this.set({systemTimeEnd:time});
+    	},
+    	setSystemTimeBegin: function(time){
+    		this.set({systemTimeBegin:time});
+    	},
+
+    	setStartTime: function(){
+			var date = new Date();
+    		var hours = date.getHours();
+    		var t     = ''
+    		
+    		if(date.getHours() > 12){
+    			hours -= 12;
+    			t = 'pm';
+    	    }
+    	    else
+    	   	    t = 'am';
+
+    		this.set({dateStart: { sYear: date.getFullYear(), sMonth: date.getUTCMonth()+1,
+    							   sDay: date.getDate(), sHours: hours, 
+    							   sMinutes:date.getMinutes()}, sAmPm:t });
+
+    	}
+
+    });
+
+    //COLLECTIONS
+    ProjectList       = Backbone.Collection.extend({ model: ProjectScroll });
+    SavedProjectsList = Backbone.Collection.extend({model: ProjectElement});
+
+    ProjectListView = Backbone.View.extend({
+
+    	tagName   : 'ul',
+    	className : 'prettyScroll',
+    	id        : 'projects',
+
+        	initialize: function () {
+        		this.templateElement = swig.compile($("#project_element_template").html());
+
+        		this.projectList = new ProjectList();
+        		var self         = this;
+	            this.projectList.on('add', function (element) {
+	            	//do some stuff
+		            self.$el.append(self.templateElement(element.toJSON()));
+
+            	});
+        	},
+
+        	render: function () {
+                this.projectList.add(projects);
+        	}
+    });
+
+    //render projectlist goes here
+    var nr = new ProjectListView();
+    nr.render();
+    nr.$el.insertAfter('#findControl');
+
+    //Wrapper + SavedProjectsListView
+	    WrapperProjectsListView = Backbone.View.extend({
+	    	el: '#createTask',
+
+			events:{
+	    		"click a#start.icon-stop" : "addSavedProject"
+	    	},
+
+	    	initialize: function(){
+	    		this.savedProjectsView = new SavedProjectsListView();
+				this.savedProjectsView.$el.insertAfter('#createTask');
+				var self = this;
+	    	},
+	    	render: function(){
+
+	    	},
+	    	addSavedProject: function(){
+	    		this.savedProjectsView.addSavedProject();
+	    	}
+	    });
+
+	//List tobe displayed
+    SavedProjectsListView   = Backbone.View.extend({
+
+    	tagName : 'ul',
+    	className : 'prettyScroll',
+    	id : 'projects',
+    	events:{
+    		"click li":"selectProject"
+
+    	},
+
+    	initialize:      function() {
+    		this.templateElement   = swig.compile($("#saved_project_element_template").html());
+
+    		this.savedProjectsList = new SavedProjectsList();
+
+    		var self = this;
+    		this.savedProjectsList.on('add', function(element){
+    			self.$el.append(self.templateElement(element.toJSON()));
+    		});
+    	},
+
+    	addSavedProject: function(event) {
+    		var model = new ProjectElement();
+    		
+    		//search the collections then add model if results are okay
+    		
+    		this.found = displayProjects.savedProjectsView.savedProjectsList.where({description:$('#description').val(), projectName:$('#project').text()});
+
+    		
+	    		if(!($('#project').text() == "+ Select Project"))
+	    			model.setProjectName($('#project').text());
+	    		else{
+	    			model.setProjectName(projectNumber);
+	    			projectNumber++;
+	    		}
+
+	    		
+	    		model.setDescription($('#description').val());
+	    		model.setTime($("input#time").val());
+	    		model.setColor($('input[type=color]').val());
+
+	    		this.savedProjectsList.add(model);
+    	},
+
+    	selectProject: function(){
+
+    	},
+
+    	toggleProject: function(model){
+    		if(model.selected)
+    			displayProjects.savedProjectsView.savedProjectsList.setSelected(false);
+    		else
+    			displayProjects.savedProjectsView.savedProjectsList.setSelected(true);
+    	}
+
+    });
+	var displayProjects = new WrapperProjectsListView();
+
+
+</script>
+
 <!--
-
-  *put margin top for 600 & 800 width
-  *fix font size
-  *fix 
-
-
 
 	<section id="timePicker">
 		<input type="text" placeholder="Start" id="">
