@@ -31,13 +31,14 @@ input.error {
 } 
 
 #projectPicker {
+	margin-top:10px;
 	border: 1px solid silver;
 	padding: 0;
-	position: absolute;
-	width: 24%;
+	position: relative;
+	width: 100%;
 	background-color: rgb(207, 194, 194);
 	top: 0;
-	left: 514px;
+	left: 0;
 	display: none;
 	overflow: hidden;
 }
@@ -72,7 +73,8 @@ a#start.icon-stop {
 }
 
 #project, #billable {
-	display: none;
+    display:none;
+
 }
 
 @media screen and (min-width: 600px) {
@@ -91,7 +93,7 @@ a#start.icon-stop {
 	
 		font-size: 1.3em;
 		float: right;
-}
+	}
 
 }
 
@@ -105,9 +107,6 @@ a#start.icon-stop {
 	#start {
 		float: right;
 		margin: 0;
-	}
-	#projectPicker {
-		display: none;
 	}
 }
 
@@ -140,20 +139,35 @@ a#start.icon-stop {
 	#start {
 		width: 7%;
 		padding: .4em 2%;
-		font-size: 2em;
+		font-size: 2.1em;
 	}
 	#description {
 		width: 40%;
 		padding: 1em 2%;
 		font-size: 1.1em;
 	}
-}
+	#projectPicker {
+		margin-top:0px;
+		border: 1px solid silver;
+		padding: 0;
+		position: absolute;
+		width: 24%;
+		background-color: rgb(207, 194, 194);
+		top: 0;
+		left: 514px;
+		display: none;
+		overflow: hidden;
+	}
+	#findProject, #newProjectName {
+        font-size:1.1;
 
+    }
+}
 
 #findProject, #newProjectName {
     border: 0;
-    font-size: 1.1em;
-    padding: 1em 10% 1em 5%; 
+    font-size: 1em;
+    padding: 1em 100% 1em 2%; 
     width: 85%;
 }
 
@@ -162,6 +176,7 @@ a#start.icon-stop {
 }
 
 div#newProject {
+	width:100%;
     height: 319px;
     position: absolute;
     top: -319px;

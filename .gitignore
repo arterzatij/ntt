@@ -3,3 +3,4 @@ bower_components
 app/js/index.js
 app/css/index.css
 npm-debug.log
+*.DS_Store
