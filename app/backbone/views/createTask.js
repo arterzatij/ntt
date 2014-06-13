@@ -39,6 +39,7 @@ module.exports = Backbone.View.extend({
   },
   openProjectList : function (e) {
     e.preventDefault();
+    console.log("hello");
     this.$('#projectPicker').fadeIn();
   },
   closeProjectList : function (e) {
