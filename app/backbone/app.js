@@ -15,7 +15,7 @@ $(function () {
     el : '#projectPicker',
     model : models.me
   });
-
   views.projectPicker.render();
-  new CreateTaskView();
+
+  window.views.createTask = new CreateTaskView();
 });
