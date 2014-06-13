@@ -13,8 +13,9 @@
     "url": "https://github.com/arielparra/nst-timesheet-web/issues"
   },
   "dependencies": {
+    "backbone": "^1.1.2",
     "jquery": "^2.1.1",
-    "backbone": "^1.1.2"
+    "swig": "^1.3.2"
   },
   "devDependencies": {
     "browserify": "^4.1.8",

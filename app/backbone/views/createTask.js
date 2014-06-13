@@ -5,21 +5,21 @@ var Timer = require('../utils/timer');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
-  events : {
-    'click #start.icon-start' : 'startTask',
-    'click #start.icon-stop'  : 'stopTask',
-    'click #selectedProject'  : 'openProjectList',
-    'click #close'       : 'closeProjectList',
-    'click a.project'    : 'selectProject',
-    'click #createproj'  : 'newProject',
-    'click #saveProject' : 'saveProject',
-    'keyup #findProject' : 'lookupProject',
-    'keyup .description' : 'verifyValue'
-  },
+
   initialize: function() {
     this.$el = $('#createTask');
     this.timer = new Timer('#timer');
   },
+
+  events : {
+    'click #start.icon-start' : 'startTask',
+    'click #start.icon-stop'  : 'stopTask',
+    'click #selectProject'    : 'openProjectPicker',
+    'click #close'            : 'closeProjectPicker',
+    'click a.project'         : 'selectProject',
+    'keyup .description'      : 'verifyValue'
+  },
+
   startTask : function (e) {
     e.preventDefault();
     var $input = this.$('.description');
@@ -32,60 +32,37 @@ module.exports = Backbone.View.extend({
       $input.attr('placeholder', 'What are you working on!');
     }
   },
+
   stopTask : function (e) {
     e.preventDefault();
     this.timer.stop();
     this.$('#start').addClass('icon-start').removeClass('icon-stop');
   },
-  openProjectList : function (e) {
+
+  openProjectPicker : function (e) {
     e.preventDefault();
     this.$('#projectPicker').addClass('show');
   },
-  closeProjectList : function (e) {
+
+  closeProjectPicker : function (e) {
     e.preventDefault();
     this.$('#projectPicker').removeClass('show');
+    this.$('input.term').val('');
   },
+
   selectProject : function (e) {
     e.preventDefault();
-    var project = $(e.target).text();
-    if (project.length > 26) {
-        project = project.substring(0, 23).concat('...');
-    }
-    this.$('#project').text(project);
+    var $project = $(e.target);
+
+    var project = $project.attr('data-project');
+    var client = $project.attr('data-client');
+
+    this.$('#selectProject').text(project);
+    this.$('p.client').text(client);
     this.$('#projectPicker').removeClass('show');
+    this.$('input.term').val('');
   },
-  newProject : function (e) {
-    e.preventDefault();
-    this.$('#newProject').addClass('show');
-  },
-  saveProject : function (e) {
-    e.preventDefault();
-    var project = $('#newProjectName').val();
-    var temp = project;
-    if (project.length > 26) {
-      project = project.substring(0, 23).concat('...');
-    }
-    var tpl = "<li><a class='project' href='#'>{0}</a></li>"
-    this.$('#projects').append(tpl.replace('{0}', temp));
-    this.$('#project').text(project);
-    this.$('#projectPicker').hide();
-    this.$('#newProject').removeClass('show');
-    $('#newProjectName').val('');
-  },
-  lookupProject : function (e) {
-    e.preventDefault();
-    var $input = $(e.target);
-    var text = $input.val().toLowerCase();
-    var $projects = $('a.project');
-    $projects.hide();
-    $projects.each(function(index, project) {
-      var $project = $(project);
-      var projectContent = $project.text().toLowerCase();
-      if (projectContent.indexOf(text) > -1) {
-        $project.show();
-      }
-    });
-  },
+
   verifyValue : function (e) {
     e.preventDefault();
     var $input = this.$('.description');
