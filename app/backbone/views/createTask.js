@@ -8,7 +8,7 @@ module.exports = Backbone.View.extend({
   events : {
     'click #start.icon-start' : 'startTask',
     'click #start.icon-stop'  : 'stopTask',
-    'click #project'     : 'openProjectList',
+    'click #selectedProject'  : 'openProjectList',
     'click #close'       : 'closeProjectList',
     'click a.project'    : 'selectProject',
     'click #createproj'  : 'newProject',
@@ -39,12 +39,11 @@ module.exports = Backbone.View.extend({
   },
   openProjectList : function (e) {
     e.preventDefault();
-    console.log("hello");
-    this.$('#projectPicker').fadeIn();
+    this.$('#projectPicker').addClass('show');
   },
   closeProjectList : function (e) {
     e.preventDefault();
-    this.$('#projectPicker').fadeOut();
+    this.$('#projectPicker').removeClass('show');
   },
   selectProject : function (e) {
     e.preventDefault();
@@ -53,7 +52,7 @@ module.exports = Backbone.View.extend({
         project = project.substring(0, 23).concat('...');
     }
     this.$('#project').text(project);
-    this.$('#projectPicker').fadeOut();
+    this.$('#projectPicker').removeClass('show');
   },
   newProject : function (e) {
     e.preventDefault();

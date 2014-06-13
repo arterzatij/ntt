@@ -8,94 +8,86 @@
   <link href="http://nearshoretechnology.com/favicon.ico" rel="shortcut icon">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet'>
   <link href="css/index.css" rel="stylesheet" />
-  <script src="js/index.js"></script>
 </head>
 
 <body>
 
-	<nav class="row">
-		<div class="small-1">
-			<img class="logo" src="img/logo.svg" 
-					 alt="NearShore Technology" 
-					 title="NearShore Technology">
-		</div>
-		<div class="small-9">
-			<h1>Ernesto Arteaga</h1>
-		</div>
-		<div class="small-2">
-			<a href="#" class="icon-config"></a>
-		</div>
-	</nav>
+  <nav class="row">
+    <div class="small-1">
+      <img class="logo" src="img/logo.svg" 
+           alt="NearShore Technology" 
+           title="NearShore Technology">
+    </div>
+    <div class="small-9">
+      <h1>Ernesto Arteaga</h1>
+    </div>
+    <div class="small-2">
+      <a href="#" class="icon-config"></a>
+    </div>
+  </nav>
 
   <section id="createTask" class="row">
     <div class="small-12">
-      <div class="row">
-      	<div class="small-9">
-      		<div class="row">
-      			<div class="small-12">
-			        <input id="timer" class="time" name="time" 
-			               type="text" value="00:00:00">
-      			</div>
-      			<div class="small-12">
-			        <input class="description" name="description" 
-			               type="text" maxlength="50"
-			               placeholder="Add a description">
-      			</div>
-      		</div>
-      	</div>
-      	<div class="small-3">
-        	<a id="start" class="start icon-start" href="#"></a>
-      	</div>
+      <div class="row main">
+        <div class="small-9">
+          <div class="row">
+            <div class="small-12">
+              <input id="timer" class="time" name="time" 
+                     type="text" value="00:00:00">
+            </div>
+            <div class="small-12">
+              <input class="description" name="description" 
+                     type="text" maxlength="50" autofocus
+                     placeholder="I'm working on...">
+            </div>
+          </div>
+        </div>
+        <div class="small-3">
+          <a id="start" class="start icon-start" href="#"></a>
+        </div>
       </div>
-      <div class="row">
-				<div class="small-12">
-					<div class="row">
-						<div class="small-5">
-							<label for="project">Project</label>
-						</div>
-						<div class="small-7">
-							<a id="selectedProject" href="#"
-								 class="selectedProject"> 
-							  + Select Project
-							</a>
-						</div>
-					</div>
-					<div class="row">
-						<div class="small-5">
-							<label for="client">Client</label>
-						</div>
-						<div class="small-7">
-							<input id="client"  class="client"
-							       type="text" readonly>
-						</div>
-					</div>
-					<div class="row">
-						<div class="small-5">
-							<p>Billable</p>
-						</div>
-						<div class="checkbox small-7">
-							<input id="billable" type="checkbox">
-							<label for="billable"></label>
-						</div>
-					</div>
-				</div>
-				<div id="projectPicker" class="small-12">
-	        <div class="findControl">
-	          <input class="term" type="search" 
-	                 placeholder="Find Project...">
-	          <a id="close" href="">x</a>
-	        </div>
-	        <ul class="projects prettyScroll">
-	          <li><a class="project" href="#">ModernMeal</a></li>
-	          <li><a class="project" href="#">Check Into Cash In Cleveland Tenessee</a></li>
-	          <li><a class="project" href="#">Advance America</a></li>
-	          <li><a class="project" href="#">Nearshore</a></li>
-	          <li><a class="project" href="#">Project number 1 that creates a new screen</a></li>
-	          <li><a class="project" href="#">Advance America 3</a></li>
-	          <li><a class="project" href="#">Advance America 44444</a></li>
-	        </ul>
-	      </div>
-			</div>
+      <div class="row options">
+      	<!-- Display for project client and select if billable or non -->
+        <div class="small-12">
+          <div class="row">
+            <div class="small-12">
+              <a id="selectedProject" href="#"
+                 class="selectedProject"> 
+                Select Project
+              </a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-12">
+              <p class="client">
+              	Client
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="checkbox small-12">
+              <input id="billable" type="checkbox">
+              <label for="billable">Billable</label>
+            </div>
+          </div>
+        </div>
+        <!-- Project Picker -->
+        <div id="projectPicker" class="small-12">
+          <div class="searchControl">
+            <input class="term" type="search" placeholder="Find Project...">
+            <a id="close" class="icon-delete" href=""></a>
+          </div>
+          <ul class="projects scroll">
+            <li><a class="project" href="#">ModernMeal</a></li>
+            <li><a class="project" href="#">Check Into Cash In Cleveland Tenessee</a></li>
+            <li><a class="project" href="#">Advance America</a></li>
+            <li><a class="project" href="#">Nearshore</a></li>
+            <li><a class="project" href="#">Project number 1 that creates a new screen</a></li>
+            <li><a class="project" href="#">Advance America 3</a></li>
+            <li><a class="project" href="#">Advance America 44444</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -104,8 +96,8 @@
       
     </article>
   </section>
-	
-		  
+  
+	<script src="js/index.js"></script>      
 </body>
 </html>
 
