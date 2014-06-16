@@ -1,5 +1,5 @@
-var $ = require('jquery');
-var TimeFormat = require('./timeFormat');
+var $ = require('jquery'),
+    TimeFormat = require('./timeFormat');
 
 module.exports = function (input) {
   var $input  = $(input),

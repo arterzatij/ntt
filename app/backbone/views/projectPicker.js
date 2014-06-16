@@ -43,16 +43,16 @@ module.exports = Backbone.View.extend({
   lookupProject : function (e) {
     e.preventDefault();
 
-    var $input = $(e.target);
-    var $projects = this.$('a.project');
-    var term = $input.val().toLowerCase();
+    var $input = $(e.target),
+        $projects = this.$('a.project'),
+        term = $input.val().toLowerCase();
     
     $projects.hide();
 
     $projects.each(function (index, project) {
-      var $project = $(project);
-
-      var projectContent = $project.text().toLowerCase();
+      var $project = $(project),
+          projectContent = $project.text().toLowerCase();
+          
       if (projectContent.indexOf(term) > -1) {
         $project.show();
       }

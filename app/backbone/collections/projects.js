@@ -1,6 +1,6 @@
-var $ = require('jquery');
-var Backbone = require('backbone');
-var Project = require('../models/project');
+var $ = require('jquery'),
+    Backbone = require('backbone'),
+    Project = require('../models/project');
 
 Backbone.$ = $;
 

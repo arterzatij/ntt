@@ -1,6 +1,6 @@
-var $ = require('jquery');
-var Backbone = require('backbone');
-var Timer = require('../utils/timer');
+var $ = require('jquery'),
+    Backbone = require('backbone'),
+    Timer = require('../utils/timer');
 
 Backbone.$ = $;
 
@@ -52,10 +52,9 @@ module.exports = Backbone.View.extend({
 
   selectProject : function (e) {
     e.preventDefault();
-    var $project = $(e.target);
-
-    var project = $project.attr('data-project');
-    var client = $project.attr('data-client');
+    var $project = $(e.target),
+        project = $project.attr('data-project'),
+        client = $project.attr('data-client');
 
     this.$('#selectProject').text(project);
     this.$('p.client').text(client);
