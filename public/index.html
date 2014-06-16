@@ -73,17 +73,13 @@
 </script>
 <!-- savedProjectsTemplate -->
 <script type="text/template" id="saved_project_element_template">
-	<li style="background-color:{{color}}" id="{{projectName}}{{description}}"><a class="project" ><p style="color:{{textColor}}">
-	<b>Project:</b> {{projectName}} - <b>Description:</b> {{description}}  - <b>Elapsed Time:</b> {{time}} - <b>Start date: </b> {{dateStart.sMonth}}/{{dateStart.sDay}}/{{dateStart.sYear}} -
-	<b> {{dateStart.sHours}}:{{dateStart.sMinutes}} {{dateStart.sAmPm}}</b>
-    <b>-::- End date: </b> {{dateEnd.eMonth}}/{{dateEnd.eDay}}/{{dateEnd.eYear}} -
-    <b> {{dateEnd.eHours}}:{{dateEnd.eMinutes}} {{dateEnd.eAmPm}}</b>
-
+	<li style="background-color:{{color}}" id="{{projectName}}{{description}}"><a class="project" >
+    <p style="color:{{textColor}}">
+    	<b>Project:</b> {{projectName}} - <b>Description:</b> {{description}}  - <b>Elapsed Time:</b> {{time}} - <b>Start date: </b> {{dateStart.sMonth}}/{{dateStart.sDay}}/{{dateStart.sYear}} -
+    	<b> {{dateStart.sHours}}:{{dateStart.sMinutes}} {{dateStart.sAmPm}}</b>
+        <b>-::- End date: </b> {{dateEnd.eMonth}}/{{dateEnd.eDay}}/{{dateEnd.eYear}} -
+        <b> {{dateEnd.eHours}}:{{dateEnd.eMinutes}} {{dateEnd.eAmPm}}</b>
 	</p>
- 
-
-
-
 	</a></li>
 </script>
 
@@ -93,7 +89,6 @@
 
 
 <script type="text/javascript">
-
 
 	//MODELS
 	ProjectScroll   = Backbone.Model.extend({});
@@ -129,15 +124,12 @@
     		//handle the time
     		this.setStartTime();
     	},
-    	
     	setProjectName: function (name) {
     		this.set({ projectName: name})
     	},
-
     	setDescription: function(desc){
     		this.set({ description: desc });
     	},
-
     	setTime: function(timer){
     		this.set({ time: timer });
     	},
@@ -190,7 +182,7 @@
             
             if(date.getHours() > 12){
                 hours -= 12;
-                ampm = 'pm';
+                ampm   = 'pm';
             }
             else
                 ampm = 'am';
@@ -208,7 +200,7 @@
     ProjectList       = Backbone.Collection.extend({ model: ProjectScroll });
     SavedProjectsList = Backbone.Collection.extend({model: ProjectElement});
 
-    ProjectListView = Backbone.View.extend({
+    ProjectListView   = Backbone.View.extend({
 
     	tagName   : 'ul',
     	className : 'prettyScroll',
@@ -236,7 +228,7 @@
     nr.render();
     nr.$el.insertAfter('#findControl');
 
-    //Wrapper + SavedProjectsListView
+    //VIEWS
 	    WrapperProjectsListView = Backbone.View.extend({
 	    	el: '#createTask',
 
@@ -244,7 +236,6 @@
 	    		"click a#start.icon-stop" : "addSavedProject",
                 "click a#start.icon-start": "beginRecording"
 	    	},
-
 	    	initialize: function(){
 	    		this.savedProjectsView = new SavedProjectsListView();
 				this.savedProjectsView.$el.insertAfter('#createTask');
@@ -262,22 +253,22 @@
 
 	    });
 
-	//List tobe displayed
-    SavedProjectsListView   = Backbone.View.extend({
+	
+    SavedProjectsListView  = Backbone.View.extend({
 
-    	tagName : 'ul',
+    	tagName   : 'ul',
     	className : 'prettyScroll',
-    	id : 'projects',
+    	id        : 'projects',
+
     	events:{
     		"click li":"selectProject"
-
     	},
 
     	initialize:      function() {
     		this.templateElement   = swig.compile($("#saved_project_element_template").html());
-            this.recModel= new ProjectElement();
+            this.recModel          = new ProjectElement();
 
-    		this.savedProjectsList     = new SavedProjectsList();
+    		this.savedProjectsList = new SavedProjectsList();
         
     		var self = this;
     		this.savedProjectsList.on('add', function(element){
@@ -289,7 +280,7 @@
 
             this.recModel = new ProjectElement();
             //search the collections then add model if results are okay
-            this.found = displayProjects.savedProjectsView.savedProjectsList.where({description:$('#description').val(), projectName:$('#project').text()});
+            
 
             if(!($('#project').text() == "+ Select Project"))
                     this.recModel.setProjectName($('#project').text());
@@ -299,15 +290,26 @@
                 }
 
                 this.recModel.setDescription($('#description').val());
-                
-                this.recModel.setColor($('input[type=color]').val());
+                this.recModel.setColor( $('input[type=color]').val());
         },
 
-    	addSavedProject: function(m) {
-                m.setEndTime()
-                this.recModel.setTime($("input#time").val());
-	    		this.savedProjectsList.add(m);
-    	}
+    	addSavedProject: function(model) {
+            model.setEndTime();
+            
+
+            this.recModel.setTime($("input#time").val());
+	    	this.savedProjectsList.add(model);
+
+            $('input#time').val('00:00:00');
+    	},
+
+        duplicatesExist: function(model){
+            this.found = displayProjects.savedProjectsView.savedProjectsList.where({description:model.description, projectName:model.projectName});
+            if(found.length >0)
+                return true;
+            else 
+                return false;
+        }
 
     });
 	var displayProjects = new WrapperProjectsListView();
