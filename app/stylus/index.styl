@@ -59,6 +59,9 @@ nav
   font-size 1.8rem
   height 27.9rem
 
+  a
+    text-decoration none
+
   p
     margin 0
 
@@ -80,7 +83,6 @@ nav
       font-size 5rem
       line-height 10rem
       text-align center
-      text-decoration none
       transition 0.5s
      
       &.icon-start
@@ -93,9 +95,8 @@ nav
       color orange_40
       font-size 5rem
 
-  .selectedProject
+  .selectProject
     display block
-    text-decoration none
 
 #projectPicker
   background orange_40
@@ -107,21 +108,29 @@ nav
   &.show
     right 0
 
+  .projects
+    font-size 1.6rem
+    list-style none
+    margin 0
+    padding 1.2rem
+
+    li
+      margin 0.5rem 0
+
+      .project
+        color white
+
   .searchControl
     position relative
     
     .icon-delete
       position absolute
       right 0.4rem
-      text-decoration none
       top 0.7rem
     
     .term
       font-size 1.8rem
-      padding 0.5rem 2.2rem 0.5rem 0.5rem
-
-  .project
-    background transparent
+      padding 0.5rem 2.2rem 0.5rem 0.5rem  
 
 .checkbox
     height 3.5rem
