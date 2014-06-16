@@ -33,7 +33,7 @@ Time Tracking - Nearshore Technology
   gulp watch
 ```
 
-*For production installation, all assets will compress (js and css) and html too.
+* For production installation, all assets will compress (js and css) and html too.
 
 ```sh
   gulp dist
