@@ -44,7 +44,7 @@ module.exports = Backbone.View.extend({
     e.preventDefault();
 
     var $input = $(e.target);
-    var $projects = $('a.project');
+    var $projects = this.$('a.project');
     var term = $input.val().toLowerCase();
     
     $projects.hide();
@@ -57,5 +57,10 @@ module.exports = Backbone.View.extend({
         $project.show();
       }
     });
+  },
+
+  clearSearch : function() {
+    this.$('input.term').val('');
+    this.$('a.project').show();
   }
 });

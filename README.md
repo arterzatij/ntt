@@ -7,46 +7,37 @@ Time Tracking - Nearshore Technology
 
 * After clone the code, install [NodeJS].
 * We are workign with fourth modules for node [stylus], [nib], [browserify] and [gulp].
-* We install them using [npm].
+* We install them using [npm] on global scope.
 
 ```sh
-  npm install -g browserify
   npm install -g gulp
   npm install -g stylus
   npm install -g nib
 ```
 
-* Now we need to install frontend dependencies
+* Now we need to install frontend dependencies and development dependecies
 
 ```sh
   npm install
 ```
 
-* We need to be sure on create folders for css and js on dev (app folder)
+* Runinng develompent build
 
 ```sh
-  mkdir app/css
-  mkdir app/js
+  gulp
 ```
 
-We are working on gulp integration for automation on build task, for now we only have the follow commands
-
-* Generation of index.js
+* If we are working on editing css and javascript we can let gulp continuously building css and javascript
 
 ```sh
-  npm run bundle
+  gulp watch
 ```
 
-* Generation of index.css
+*For production installation, all assets will compress (js and css) and html too.
 
 ```sh
-  stylus app/stylus/index.styl -o app/css/ -u nib
+  gulp dist
 ```
-
-What's next
-----
-
-Implement gulp to automate all build task and compress assets for production grade
 
 [NodeJS]:http://nodejs.org/
 [npm]:https://www.npmjs.org/

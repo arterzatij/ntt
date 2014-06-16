@@ -47,7 +47,7 @@ module.exports = Backbone.View.extend({
   closeProjectPicker : function (e) {
     e.preventDefault();
     this.$('#projectPicker').removeClass('show');
-    this.$('input.term').val('');
+    views.projectPicker.clearSearch();
   },
 
   selectProject : function (e) {
@@ -60,7 +60,7 @@ module.exports = Backbone.View.extend({
     this.$('#selectProject').text(project);
     this.$('p.client').text(client);
     this.$('#projectPicker').removeClass('show');
-    this.$('input.term').val('');
+    views.projectPicker.clearSearch();
   },
 
   verifyValue : function (e) {
