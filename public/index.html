@@ -44,15 +44,41 @@
 
 				<!-- projectlist goes here -->
 				<a id="createproj" href=""> + CREATE PROJECT</a>
-
-
 			</div>
 		</div>
 
+        <section id="calendar">
+            <div id="calendarDisplay">
+                From:
+                <input id="calendarFrom" type="date" value="0">
+                </input>
+                <br>
+                To:
+                <input id="calendarTo" type="date" value="0">
+                </input>
+                <br>
+                <input id="calcCalendar" type="submit" value="Calculate">
+                <!-- Days display -->
+                <div id="theday">
+                    <span id="numberDays">
+                        <h3 id="days">0</h3>
+                    </span>
+                </div>
+            </div>
+        </section>
 	</section>
 
 
+
+
+
+
+
+
+
 <!--backbone -->
+
+
 <script>
 	var projects = [
 	  {name: "modernmeal"},
@@ -73,27 +99,18 @@
 </script>
 <!-- savedProjectsTemplate -->
 <script type="text/template" id="saved_project_element_template">
-	<li style="background-color:{{color}}" id="{{projectName}}{{description}}"><a class="project" ><p style="color:{{textColor}}">
-	<b>Project:</b> {{projectName}} - <b>Description:</b> {{description}}  - <b>Elapsed Time:</b> {{time}} - <b>Start date: </b> {{dateStart.sMonth}}/{{dateStart.sDay}}/{{dateStart.sYear}} -
-	<b> {{dateStart.sHours}}:{{dateStart.sMinutes}} {{dateStart.sAmPm}}</b>
-    <b>-::- End date: </b> {{dateEnd.eMonth}}/{{dateEnd.eDay}}/{{dateEnd.eYear}} -
-    <b> {{dateEnd.eHours}}:{{dateEnd.eMinutes}} {{dateEnd.eAmPm}}</b>
-
+	<li style="background-color:{{color}}" id="{{projectName}}{{description}}"><a class="project" >
+    <p style="color:{{textColor}}">
+    	<b>Project:</b> {{projectName}} - <b>Description:</b> {{description}}  - <b>Elapsed Time:</b> {{time}} - <b>Start date: </b> {{dateStart.sMonth}}/{{dateStart.sDay}}/{{dateStart.sYear}} -
+    	<b> {{dateStart.sHours}}:{{dateStart.sMinutes}} {{dateStart.sAmPm}}</b>
+        <b>-::- End date: </b> {{dateEnd.eMonth}}/{{dateEnd.eDay}}/{{dateEnd.eYear}} -
+        <b> {{dateEnd.eHours}}:{{dateEnd.eMinutes}} {{dateEnd.eAmPm}}</b>
 	</p>
- 
-
-
-
 	</a></li>
 </script>
 
-<!--search bar -->
-<div id="search_container"></div>
-
-
 
 <script type="text/javascript">
-
 
 	//MODELS
 	ProjectScroll   = Backbone.Model.extend({});
@@ -129,15 +146,12 @@
     		//handle the time
     		this.setStartTime();
     	},
-    	
     	setProjectName: function (name) {
     		this.set({ projectName: name})
     	},
-
     	setDescription: function(desc){
     		this.set({ description: desc });
     	},
-
     	setTime: function(timer){
     		this.set({ time: timer });
     	},
@@ -190,7 +204,7 @@
             
             if(date.getHours() > 12){
                 hours -= 12;
-                ampm = 'pm';
+                ampm   = 'pm';
             }
             else
                 ampm = 'am';
@@ -208,7 +222,8 @@
     ProjectList       = Backbone.Collection.extend({ model: ProjectScroll });
     SavedProjectsList = Backbone.Collection.extend({model: ProjectElement});
 
-    ProjectListView = Backbone.View.extend({
+    //VIEWS
+    ProjectListView   = Backbone.View.extend({
 
     	tagName   : 'ul',
     	className : 'prettyScroll',
@@ -236,48 +251,62 @@
     nr.render();
     nr.$el.insertAfter('#findControl');
 
-    //Wrapper + SavedProjectsListView
 	    WrapperProjectsListView = Backbone.View.extend({
 	    	el: '#createTask',
 
 			events:{
 	    		"click a#start.icon-stop" : "addSavedProject",
-                "click a#start.icon-start": "beginRecording"
+                "click a#start.icon-start": "beginRecording",
+                "click input#calcCalendar": "calculateTime"
 	    	},
-
 	    	initialize: function(){
+                
 	    		this.savedProjectsView = new SavedProjectsListView();
-				this.savedProjectsView.$el.insertAfter('#createTask');
+				this.savedProjectsView.$el.insertBefore('#calendar');
 				var self = this;
 	    	},
-	    	render: function(){
+	    	render         : function(){
 
 	    	},
-            beginRecording: function(){
+            beginRecording : function(){
                 this.savedProjectsView.beginRecording();
             },
 	    	addSavedProject: function(){
 	    		this.savedProjectsView.addSavedProject(this.savedProjectsView.recModel);
-	    	}
+	    	},
+            calculateTime  : function(){
+                var from = $("#calendarFrom").val();
+                var to   = $("#calendarTo").val();
+                
+                //year, month, day
+                var pFrom = from.split('-').map(function(x){return parseInt(x)});;
+                var pTo   = to.split('-').map(function(x){return parseInt(x)});;
 
+                var firstDate = new Date(pFrom[0], pFrom[1]-1, pFrom[2]);
+                var secDate   = new Date(pTo[0], pTo[1]-1, pTo[2]);
+
+                var Days = Math.floor((secDate.getTime() - firstDate.getTime())/(1000*60*60*24));
+                if(Days <0 || isNaN(Days))
+                    $("h3#days").text("Invalid");
+                else{
+                 //   alert("Days: " + Days);
+                    $("h3#days").text(Days).append(" days");
+                }
+            }
 	    });
 
-	//List tobe displayed
-    SavedProjectsListView   = Backbone.View.extend({
+	
+    SavedProjectsListView  = Backbone.View.extend({
 
-    	tagName : 'ul',
+    	tagName   : 'ul',
     	className : 'prettyScroll',
-    	id : 'projects',
-    	events:{
-    		"click li":"selectProject"
-
-    	},
+    	id        : 'projects',
 
     	initialize:      function() {
     		this.templateElement   = swig.compile($("#saved_project_element_template").html());
-            this.recModel= new ProjectElement();
+            this.recModel          = new ProjectElement();
 
-    		this.savedProjectsList     = new SavedProjectsList();
+    		this.savedProjectsList = new SavedProjectsList();
         
     		var self = this;
     		this.savedProjectsList.on('add', function(element){
@@ -289,7 +318,7 @@
 
             this.recModel = new ProjectElement();
             //search the collections then add model if results are okay
-            this.found = displayProjects.savedProjectsView.savedProjectsList.where({description:$('#description').val(), projectName:$('#project').text()});
+            
 
             if(!($('#project').text() == "+ Select Project"))
                     this.recModel.setProjectName($('#project').text());
@@ -299,15 +328,26 @@
                 }
 
                 this.recModel.setDescription($('#description').val());
-                
-                this.recModel.setColor($('input[type=color]').val());
+                this.recModel.setColor( $('input[type=color]').val());
         },
 
-    	addSavedProject: function(m) {
-                m.setEndTime()
-                this.recModel.setTime($("input#time").val());
-	    		this.savedProjectsList.add(m);
-    	}
+    	addSavedProject: function(model) {
+            model.setEndTime();
+            
+
+            this.recModel.setTime($("input#time").val());
+	    	this.savedProjectsList.add(model);
+
+            $('input#time').val('00:00:00');
+    	},
+
+        duplicatesExist: function(model){
+            this.found = displayProjects.savedProjectsView.savedProjectsList.where({description:model.description, projectName:model.projectName});
+            if(found.length >0)
+                return true;
+            else 
+                return false;
+        }
 
     });
 	var displayProjects = new WrapperProjectsListView();

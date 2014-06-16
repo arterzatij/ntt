@@ -240,10 +240,26 @@ ul#projects {
 	font-size: .7em;
 }
 
-#activeProject{
-	background:red;
-}
 
+#theday {
+    -moz-border-radius:5px;
+    background-color:#36387B;
+    color:#FFFFFF;
+    float:left;
+    font-size:90px;
+    height:80px;
+    line-height:50px;
+    margin-top:30px;
+    padding:60px;
+    text-shadow:0 0 5px #DDDDDD;
+    width:117px;
+}
+ 
+#theday span {
+    display:block;
+    font-size:16px;
+    text-align:center;
+}
 
 
 

@@ -48,6 +48,11 @@ var Timer = function (input) {
         clearInterval(timer);
         started = false;
       }
+    },
+    reset : function(){
+      time.s = 0;
+      time.m = 0;
+      time.h = 0;
     }
   }
 };
@@ -84,6 +89,8 @@ CreateTaskView = Backbone.View.extend({
       e.preventDefault();
       this.timer.stop();
       this.$('#start').addClass('icon-start').removeClass('icon-stop');
+
+      this.timer.reset();
     },
     openProjectList : function (e) {
       e.preventDefault();
