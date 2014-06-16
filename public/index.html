@@ -222,8 +222,6 @@
     ProjectList       = Backbone.Collection.extend({ model: ProjectScroll });
     SavedProjectsList = Backbone.Collection.extend({model: ProjectElement});
 
-
-
     //VIEWS
     ProjectListView   = Backbone.View.extend({
 
@@ -289,7 +287,7 @@
 
                 var Days = Math.floor((secDate.getTime() - firstDate.getTime())/(1000*60*60*24));
                 if(Days <0 || isNaN(Days))
-                    alert('Invalid Input...');
+                    $("h3#days").text("Invalid");
                 else{
                  //   alert("Days: " + Days);
                     $("h3#days").text(Days).append(" days");
