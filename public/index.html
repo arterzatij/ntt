@@ -44,15 +44,41 @@
 
 				<!-- projectlist goes here -->
 				<a id="createproj" href=""> + CREATE PROJECT</a>
-
-
 			</div>
 		</div>
 
+        <section id="calendar">
+            <div id="calendarDisplay">
+                From:
+                <input id="calendarFrom" type="date" value="0">
+                </input>
+                <br>
+                To:
+                <input id="calendarTo" type="date" value="0">
+                </input>
+                <br>
+                <input id="calcCalendar" type="submit" value="Calculate">
+                <!-- Days display -->
+                <div id="theday">
+                    <span id="numberDays">
+                        <h3 id="days">0</h3>
+                    </span>
+                </div>
+            </div>
+        </section>
 	</section>
 
 
+
+
+
+
+
+
+
 <!--backbone -->
+
+
 <script>
 	var projects = [
 	  {name: "modernmeal"},
@@ -82,10 +108,6 @@
 	</p>
 	</a></li>
 </script>
-
-<!--search bar -->
-<div id="search_container"></div>
-
 
 
 <script type="text/javascript">
@@ -200,6 +222,9 @@
     ProjectList       = Backbone.Collection.extend({ model: ProjectScroll });
     SavedProjectsList = Backbone.Collection.extend({model: ProjectElement});
 
+
+
+    //VIEWS
     ProjectListView   = Backbone.View.extend({
 
     	tagName   : 'ul',
@@ -228,29 +253,48 @@
     nr.render();
     nr.$el.insertAfter('#findControl');
 
-    //VIEWS
 	    WrapperProjectsListView = Backbone.View.extend({
 	    	el: '#createTask',
 
 			events:{
 	    		"click a#start.icon-stop" : "addSavedProject",
-                "click a#start.icon-start": "beginRecording"
+                "click a#start.icon-start": "beginRecording",
+                "click input#calcCalendar": "calculateTime"
 	    	},
 	    	initialize: function(){
+                
 	    		this.savedProjectsView = new SavedProjectsListView();
-				this.savedProjectsView.$el.insertAfter('#createTask');
+				this.savedProjectsView.$el.insertBefore('#calendar');
 				var self = this;
 	    	},
-	    	render: function(){
+	    	render         : function(){
 
 	    	},
-            beginRecording: function(){
+            beginRecording : function(){
                 this.savedProjectsView.beginRecording();
             },
 	    	addSavedProject: function(){
 	    		this.savedProjectsView.addSavedProject(this.savedProjectsView.recModel);
-	    	}
+	    	},
+            calculateTime  : function(){
+                var from = $("#calendarFrom").val();
+                var to   = $("#calendarTo").val();
+                
+                //year, month, day
+                var pFrom = from.split('-').map(function(x){return parseInt(x)});;
+                var pTo   = to.split('-').map(function(x){return parseInt(x)});;
 
+                var firstDate = new Date(pFrom[0], pFrom[1]-1, pFrom[2]);
+                var secDate   = new Date(pTo[0], pTo[1]-1, pTo[2]);
+
+                var Days = Math.floor((secDate.getTime() - firstDate.getTime())/(1000*60*60*24));
+                if(Days <0 || isNaN(Days))
+                    alert('Invalid Input...');
+                else{
+                 //   alert("Days: " + Days);
+                    $("h3#days").text(Days).append(" days");
+                }
+            }
 	    });
 
 	
@@ -259,10 +303,6 @@
     	tagName   : 'ul',
     	className : 'prettyScroll',
     	id        : 'projects',
-
-    	events:{
-    		"click li":"selectProject"
-    	},
 
     	initialize:      function() {
     		this.templateElement   = swig.compile($("#saved_project_element_template").html());
